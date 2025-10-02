@@ -46,6 +46,7 @@ class SingleLinkedList {
       print("we can't find any key : $key");
       return;
     }
+
     Node newNode = Node(data); //we take the node which is 25
     newNode.next = temp.next; // if temp=10 then temp.next =20 in this line
     temp.next =
@@ -54,6 +55,59 @@ class SingleLinkedList {
     //if we use temp.next on the left side we will read only the original value not assigning to the new value
   }
 
+  //deleting section ******
+  //delete data from the begining
+  void deleteAtFirst() {
+    if (head == null) {
+      print("we can't delete data because list is null");
+      return;
+    }
+    head = head!.next;
+  }
+
+  //delete value from the end
+  void deleteAtEnd() {
+    if (head == null) {
+      print("list is empty");
+    }
+    if (head!.next == null) {
+      head = null;
+      return;
+    }
+    Node temp = head!;
+    while (temp.next!.next != null) {
+      temp = temp.next!;
+    }
+    temp.next = null;
+  }
+
+  //delete by key
+  void deleteByKey(int key) {
+    if (head == null) {
+      print("list is empty");
+      return;
+    }
+    if (head!.data == key) {
+      head = head!.next;
+      return;
+    }
+    Node temp = head!;
+    while (temp.next != null && temp.next!.data != key) {
+      // 1:if the next value is not null move to the next value
+      temp = temp
+          .next!; //2:if the next value is not equal to key move to the next value
+    }
+    if (temp.next == null) {
+      //if the next value is null so it's mean that we didn't find the key
+      print("key not found ");
+      return;
+    }
+    temp.next = temp
+        .next!
+        .next; //if we have list 10,20,30 so it will link 10 with 30 and 20 will remove
+  }
+
+  //deleting section *****
   //display the list
   List display() {
     Node? temp = head!;
@@ -73,7 +127,10 @@ void main() {
   a.insertAtBegining(20);
   a.insertAtLast(33);
   a.insertRandom(10, 18);
-  a.insertRandom(11, 15);
+  // a.insertRandom(11, 15);
+  // a.deleteAtFirst();
+  // a.deleteAtEnd();
+  a.deleteByKey(33);
 
   print(a.display());
 }
