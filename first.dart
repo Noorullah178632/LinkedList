@@ -108,6 +108,35 @@ class SingleLinkedList {
   }
 
   //deleting section *****
+
+  //search a value in the single linked list
+  bool searchKey(int key) {
+    Node? temp = head;
+    while (temp != null) {
+      if (temp.data == key) {
+        print("Found $key in the list");
+        return true;
+      }
+      temp = temp.next;
+    }
+    print("value not found ");
+    return false;
+  }
+
+  //find and update the value
+  void findAndUpdate(int oldValue, int newValue) {
+    Node? temp = head;
+    while (temp != null) {
+      if (temp.data == oldValue) {
+        print("find $oldValue and update to $newValue");
+        temp.data = newValue;
+        return;
+      }
+      temp = temp.next;
+    }
+    print("Not find $oldValue in the list");
+  }
+
   //display the list
   List display() {
     Node? temp = head!;
@@ -130,7 +159,9 @@ void main() {
   // a.insertRandom(11, 15);
   // a.deleteAtFirst();
   // a.deleteAtEnd();
-  a.deleteByKey(33);
+  // a.deleteByKey(33);
+  a.searchKey(20);
+  a.findAndUpdate(10, 44);
 
   print(a.display());
 }
